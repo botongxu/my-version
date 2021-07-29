@@ -2,8 +2,6 @@ import { Suspense, lazy } from "react";
 import type { PartialRouteObject } from "react-router";
 import { Navigate } from "react-router-dom";
 import AuthGuard from "./components/AuthGuard";
-import BlogLayout from "./components/blog/BlogLayout";
-import BrowseLayout from "./components/BrowseLayout";
 import DashboardLayout from "./components/dashboard/DashboardLayout";
 import DocsLayout from "./components/docs/DocsLayout";
 import GuestGuard from "./components/GuestGuard";
@@ -16,44 +14,6 @@ const Loadable = (Component) => (props) =>
       <Component {...props} />
     </Suspense>
   );
-
-// Browse pages
-
-const Browse = Loadable(lazy(() => import("./pages/browse/Browse")));
-const BrowseButtons = Loadable(
-  lazy(() => import("./pages/browse/BrowseButtons"))
-);
-const BrowseCharts = Loadable(
-  lazy(() => import("./pages/browse/BrowseCharts"))
-);
-const BrowseColors = Loadable(
-  lazy(() => import("./pages/browse/BrowseColors"))
-);
-const BrowseDetailLists = Loadable(
-  lazy(() => import("./pages/browse/BrowseDetailLists"))
-);
-const BrowseForms = Loadable(lazy(() => import("./pages/browse/BrowseForms")));
-const BrowseGridLists = Loadable(
-  lazy(() => import("./pages/browse/BrowseGridLists"))
-);
-const BrowseGroupedLists = Loadable(
-  lazy(() => import("./pages/browse/BrowseGroupedLists"))
-);
-const BrowseInputs = Loadable(
-  lazy(() => import("./pages/browse/BrowseInputs"))
-);
-const BrowseModals = Loadable(
-  lazy(() => import("./pages/browse/BrowseModals"))
-);
-const BrowseQuickStats = Loadable(
-  lazy(() => import("./pages/browse/BrowseQuickStats"))
-);
-const BrowseTables = Loadable(
-  lazy(() => import("./pages/browse/BrowseTables"))
-);
-const BrowseTypography = Loadable(
-  lazy(() => import("./pages/browse/BrowseTypography"))
-);
 
 // Authentication pages
 
@@ -71,50 +31,16 @@ const VerifyCode = Loadable(
   lazy(() => import("./pages/authentication/VerifyCode"))
 );
 
-// Blog pages
-
-const BlogPostCreate = Loadable(
-  lazy(() => import("./pages/blog/BlogPostCreate"))
-);
-const BlogPostDetails = Loadable(
-  lazy(() => import("./pages/blog/BlogPostDetails"))
-);
-const BlogPostList = Loadable(lazy(() => import("./pages/blog/BlogPostList")));
-
-// Dashboard pages
-
-const Account = Loadable(lazy(() => import("./pages/dashboard/Account")));
-const Analytics = Loadable(lazy(() => import("./pages/dashboard/Analytics")));
-const Calendar = Loadable(lazy(() => import("./pages/dashboard/Calendar")));
-const Chat = Loadable(lazy(() => import("./pages/dashboard/Chat")));
-const CustomerDetails = Loadable(
-  lazy(() => import("./pages/dashboard/CustomerDetails"))
-);
-const CustomerEdit = Loadable(
-  lazy(() => import("./pages/dashboard/CustomerEdit"))
-);
-const CustomerList = Loadable(
-  lazy(() => import("./pages/dashboard/CustomerList"))
-);
-const Finance = Loadable(lazy(() => import("./pages/dashboard/Finance")));
-const InvoiceDetails = Loadable(
-  lazy(() => import("./pages/dashboard/InvoiceDetails"))
-);
-const InvoiceList = Loadable(
-  lazy(() => import("./pages/dashboard/InvoiceList"))
-);
-const Kanban = Loadable(lazy(() => import("./pages/dashboard/Kanban")));
-const Mail = Loadable(lazy(() => import("./pages/dashboard/Mail")));
-const OrderDetails = Loadable(
-  lazy(() => import("./pages/dashboard/OrderDetails"))
-);
-const OrderList = Loadable(lazy(() => import("./pages/dashboard/OrderList")));
 const Overview = Loadable(lazy(() => import("./pages/dashboard/Overview")));
-const ProductCreate = Loadable(
-  lazy(() => import("./pages/dashboard/ProductCreate"))
+
+const AppointmentDashboard = Loadable(
+  lazy(() => import("./pages/appointment/AppointmentDashboard"))
 );
-const ProductList = Loadable(
-  lazy(() => import("./pages/dashboard/ProductList"))
+const PatientDashboard = Loadable(
+  lazy(() => import("./pages/patient/PatientDashboard"))
+);
+const ProviderDashboard = Loadable(
+  lazy(() => import("./pages/provider/ProviderDashboard"))
 );
 
 // Docs pages
@@ -128,32 +54,6 @@ const AuthorizationRequired = Loadable(
 );
 const NotFound = Loadable(lazy(() => import("./pages/NotFound")));
 const ServerError = Loadable(lazy(() => import("./pages/ServerError")));
-
-// Projects pages
-
-const ProjectBrowse = Loadable(
-  lazy(() => import("./pages/dashboard/ProjectBrowse"))
-);
-const ProjectCreate = Loadable(
-  lazy(() => import("./pages/dashboard/ProjectCreate"))
-);
-const ProjectDetails = Loadable(
-  lazy(() => import("./pages/dashboard/ProjectDetails"))
-);
-
-// Social pages
-
-const SocialFeed = Loadable(lazy(() => import("./pages/dashboard/SocialFeed")));
-const SocialProfile = Loadable(
-  lazy(() => import("./pages/dashboard/SocialProfile"))
-);
-
-// Other pages
-
-const Checkout = Loadable(lazy(() => import("./pages/Checkout")));
-const Contact = Loadable(lazy(() => import("./pages/Contact")));
-const Home = Loadable(lazy(() => import("./pages/Home")));
-const Pricing = Loadable(lazy(() => import("./pages/Pricing")));
 
 const routes: PartialRouteObject[] = [
   {
@@ -213,35 +113,67 @@ const routes: PartialRouteObject[] = [
   },
   {
     path: "patients",
+    element: (
+      <AuthGuard>
+        <DashboardLayout />
+      </AuthGuard>
+    ),
     children: [
       {
         path: "/",
-        element: <CustomerList />,
+        element: <PatientDashboard />,
       },
       // {
-      //   path: ":customerId",
-      //   element: <CustomerDetails />,
+      //   path: ":patientId",
+      //   element: <PatientDetails />,
       // },
       // {
-      //   path: ":customerId/edit",
-      //   element: <CustomerEdit />,
+      //   path: ":patientId/edit",
+      //   element: <PatientEdit />,
+      // },
+    ],
+  },
+  {
+    path: "providers",
+    element: (
+      <AuthGuard>
+        <DashboardLayout />
+      </AuthGuard>
+    ),
+    children: [
+      {
+        path: "/",
+        element: <ProviderDashboard />,
+      },
+      // {
+      //   path: ":providerId",
+      //   element: <ProviderDetails />,
+      // },
+      // {
+      //   path: ":providerId/edit",
+      //   element: <ProviderEdit />,
       // },
     ],
   },
   {
     path: "appointments",
+    element: (
+      <AuthGuard>
+        <DashboardLayout />
+      </AuthGuard>
+    ),
     children: [
       {
         path: "/",
-        element: <CustomerList />,
+        element: <AppointmentDashboard />,
       },
       // {
-      //   path: ":customerId",
-      //   element: <CustomerDetails />,
+      //   path: ":appointmentId",
+      //   element: <AppointmentDetails />,
       // },
       // {
-      //   path: ":customerId/edit",
-      //   element: <CustomerEdit />,
+      //   path: ":appointmentId/edit",
+      //   element: <AppointmentEdit />,
       // },
     ],
   },
@@ -256,6 +188,28 @@ const routes: PartialRouteObject[] = [
       {
         path: "*",
         element: <Docs />,
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: <MainLayout />,
+    children: [
+      {
+        path: "401",
+        element: <AuthorizationRequired />,
+      },
+      {
+        path: "404",
+        element: <NotFound />,
+      },
+      {
+        path: "500",
+        element: <ServerError />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },
