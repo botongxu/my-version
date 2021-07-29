@@ -46,6 +46,21 @@ const sections = [
         path: "/home",
         icon: <ChartSquareBarIcon fontSize="small" />,
       },
+      {
+        title: "Appoinements",
+        path: "/appointments",
+        icon: <ShoppingCartIcon fontSize="small" />,
+        // children: [
+        //   {
+        //     title: "List",
+        //     path: "/dashboard/products",
+        //   },
+        //   {
+        //     title: "Create",
+        //     path: "/dashboard/products/new",
+        //   },
+        // ],
+      },
       // {
       //   title: "Analytics",
       //   path: "/dashboard/analytics",
@@ -64,7 +79,7 @@ const sections = [
     ],
   },
   {
-    title: "Health Information Management",
+    title: "Health Information",
     items: [
       {
         title: "Patients",
@@ -85,21 +100,7 @@ const sections = [
         //   },
         // ],
       },
-      {
-        title: "Appoinements",
-        path: "/appointments",
-        icon: <ShoppingCartIcon fontSize="small" />,
-        // children: [
-        //   {
-        //     title: "List",
-        //     path: "/dashboard/products",
-        //   },
-        //   {
-        //     title: "Create",
-        //     path: "/dashboard/products/new",
-        //   },
-        // ],
-      },
+
       // {
       //   title: "Orders",
       //   icon: <FolderOpenIcon fontSize="small" />,
@@ -130,6 +131,30 @@ const sections = [
       //     },
       //   ],
       // },
+    ],
+  },
+  {
+    title: "Administration",
+    items: [
+      {
+        title: "Providers",
+        path: "/providers",
+        icon: <UsersIcon fontSize="small" />,
+        // children: [
+        //   {
+        //     title: "List",
+        //     path: "/dashboard/customers",
+        //   },
+        //   {
+        //     title: "Details",
+        //     path: "/dashboard/customers/1",
+        //   },
+        //   {
+        //     title: "Edit",
+        //     path: "/dashboard/customers/1/edit",
+        //   },
+        // ],
+      },
     ],
   },
   // {
