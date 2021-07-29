@@ -2,8 +2,6 @@ import { Suspense, lazy } from "react";
 import type { PartialRouteObject } from "react-router";
 import { Navigate } from "react-router-dom";
 import AuthGuard from "./components/AuthGuard";
-import BlogLayout from "./components/blog/BlogLayout";
-import BrowseLayout from "./components/BrowseLayout";
 import DashboardLayout from "./components/dashboard/DashboardLayout";
 import DocsLayout from "./components/docs/DocsLayout";
 import GuestGuard from "./components/GuestGuard";
@@ -33,11 +31,17 @@ const VerifyCode = Loadable(
   lazy(() => import("./pages/authentication/VerifyCode"))
 );
 
-const CustomerList = Loadable(
-  lazy(() => import("./pages/dashboard/CustomerList"))
-);
-
 const Overview = Loadable(lazy(() => import("./pages/dashboard/Overview")));
+
+const AppointmentDashboard = Loadable(
+  lazy(() => import("./pages/appointment/AppointmentDashboard"))
+);
+const PatientDashboard = Loadable(
+  lazy(() => import("./pages/patient/PatientDashboard"))
+);
+const ProviderDashboard = Loadable(
+  lazy(() => import("./pages/provider/ProviderDashboard"))
+);
 
 // Docs pages
 
@@ -109,35 +113,67 @@ const routes: PartialRouteObject[] = [
   },
   {
     path: "patients",
+    element: (
+      <AuthGuard>
+        <DashboardLayout />
+      </AuthGuard>
+    ),
     children: [
       {
         path: "/",
-        element: <CustomerList />,
+        element: <PatientDashboard />,
       },
       // {
-      //   path: ":customerId",
-      //   element: <CustomerDetails />,
+      //   path: ":patientId",
+      //   element: <PatientDetails />,
       // },
       // {
-      //   path: ":customerId/edit",
-      //   element: <CustomerEdit />,
+      //   path: ":patientId/edit",
+      //   element: <PatientEdit />,
+      // },
+    ],
+  },
+  {
+    path: "providers",
+    element: (
+      <AuthGuard>
+        <DashboardLayout />
+      </AuthGuard>
+    ),
+    children: [
+      {
+        path: "/",
+        element: <ProviderDashboard />,
+      },
+      // {
+      //   path: ":providerId",
+      //   element: <ProviderDetails />,
+      // },
+      // {
+      //   path: ":providerId/edit",
+      //   element: <ProviderEdit />,
       // },
     ],
   },
   {
     path: "appointments",
+    element: (
+      <AuthGuard>
+        <DashboardLayout />
+      </AuthGuard>
+    ),
     children: [
       {
         path: "/",
-        element: <CustomerList />,
+        element: <AppointmentDashboard />,
       },
       // {
-      //   path: ":customerId",
-      //   element: <CustomerDetails />,
+      //   path: ":appointmentId",
+      //   element: <AppointmentDetails />,
       // },
       // {
-      //   path: ":customerId/edit",
-      //   element: <CustomerEdit />,
+      //   path: ":appointmentId/edit",
+      //   element: <AppointmentEdit />,
       // },
     ],
   },

@@ -1,22 +1,16 @@
-import type { FC } from 'react';
-import type { Theme } from '@material-ui/core';
-import { experimentalStyled } from '@material-ui/core/styles';
-import type { SxProps } from '@material-ui/system';
+import type { FC } from "react";
+import type { Theme } from "@material-ui/core";
+import { experimentalStyled } from "@material-ui/core/styles";
+import type { SxProps } from "@material-ui/system";
 
 interface LogoProps {
   sx?: SxProps<Theme>;
 }
 
-const LogoRoot = experimentalStyled('svg')``;
+const LogoRoot = experimentalStyled("svg")``;
 
 const Logo: FC<LogoProps> = (props) => (
-  <LogoRoot
-    height="52"
-    version="1.1"
-    viewBox="0 0 52 52"
-    width="52"
-    {...props}
-  >
+  <LogoRoot height="52" version="1.1" viewBox="0 0 52 52" width="52" {...props}>
     <title>MKP</title>
     <defs>
       <filter id="filter">
@@ -27,18 +21,10 @@ const Logo: FC<LogoProps> = (props) => (
         />
       </filter>
     </defs>
-    <g
-      fill="none"
-      stroke="none"
-    >
+    <g fill="none" stroke="none">
       <g filter="url(#filter)">
         <g>
-          <rect
-            height="52"
-            width="52"
-            x="0"
-            y="4.26325641e-14"
-          />
+          <rect height="52" width="52" x="0" y="4.26325641e-14" />
           <path
             d="M23.2968,26.3643 L11.87,19.9731 C11.606,19.8255 11.3864,19.6106 11.2335,19.3506 C11.0806,19.0905 11,18.7947 11,18.4934 C11,18.1921 11.0806,17.8963 11.2335,17.6362 C11.3864,17.3762 11.606,17.1613 11.87,17.0137 L23.2967,10.6222 C24.026,10.2143 24.8484,10 25.6849,10 C26.5215,10 27.3439,10.2143 28.0731,10.6222 L39.4999,17.0137 C39.7638,17.1613 39.9835,17.3762 40.1364,17.6362 C40.2893,17.8963 40.3699,18.1921 40.3699,18.4934 C40.3699,18.7947 40.2893,19.0905 40.1364,19.3506 C39.9835,19.6106 39.7638,19.8255 39.4999,19.9731 L28.0731,26.3643 C27.3439,26.7722 26.5215,26.9864 25.6849,26.9864 C24.8484,26.9864 24.026,26.7722 23.2968,26.3643 Z"
             fill="#2196F3"
